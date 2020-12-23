@@ -149,4 +149,5 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
 # Login
-LOGIN_URL = '/'
+# if doesnt satisfy login required will redirect to this page
+LOGIN_URL = '/account/login'
