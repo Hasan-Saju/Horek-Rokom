@@ -21,3 +21,4 @@ class ProductDetail(LoginRequiredMixin, DetailView):
     model=Product
     context_object_name="product"
     template_name='App_Shop/product_details.htm'
+    
