@@ -36,7 +36,7 @@ def login_user(request):
             user=authenticate(username=username,password=password)
             if user is not None:
                 login(request,user)
-                return HttpResponse('Logged in')
+                return HttpResponseRedirect(reverse('App_Shop:home'))
 
     return render(request,'App_Login/login.htm',context={'form':form})
 
@@ -45,7 +45,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.warning(request,"You are logged out!")
-    return HttpResponse("Logged out")
+    return HttpResponseRedirect(reverse('App_Shop:home'))
 
 @login_required
 def user_profile(request):
@@ -58,7 +58,7 @@ def user_profile(request):
             form.save()
             messages.success(request,"Profile Updated Successfully!")
             form=ProfileForm(instance=profile)
-    return render(request,'App_LOgin/change_profile.htm',context={'form':form})
+    return render(request,'App_Login/change_profile.htm',context={'form':form})
 
 
 

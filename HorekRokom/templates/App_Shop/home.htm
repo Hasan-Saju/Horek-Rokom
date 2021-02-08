@@ -1,0 +1,12 @@
+{% extends 'base.htm' %}
+{% block body_block %}
+
+{% for product in object_list %}
+{% comment %} home view te kono object er nam boli nai tai default object_list {% endcomment %}
+    {{product.name}}
+{% endfor %}
+
+
+
+
+{% endblock %}
