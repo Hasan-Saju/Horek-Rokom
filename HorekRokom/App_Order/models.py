@@ -15,7 +15,7 @@ class Cart(models.Model):
     updated=models.DateTimeField(auto_now=True)     #prottek update a
 
     def __str__(self):
-        return f'(self.quantity) X (self.item)'
+        return f'{self.quantity} X {self.item}'
     
     def get_total(self):
         total=self.item.price*self.quantity
