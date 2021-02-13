@@ -22,7 +22,7 @@ class BillingAddress(models.Model):
             value=getattr(self,field_name)
             if value is None or value=='':
                 return False
-        return true 
+        return True 
 
     class Meta:
         verbose_name_plural="Billing Addresses" #table er nam

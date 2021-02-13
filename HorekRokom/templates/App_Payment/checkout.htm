@@ -38,7 +38,14 @@
                 </div>
 
             </div>
-
+            <br>
+            {% if saved_address.is_fully_filled %}
+            <a href="{% url 'App_Payment:pay' %}" class="btn btn-warning btn-md">Make Payment</a>
+            {% else %}
+            <div class="alert alert-info">
+                <p>Please fill up all the information to make Payment </p>
+            </div>
+            {% endif %} 
         </div>
 
     </div>
