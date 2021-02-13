@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 #models and form
-from App_Order.models import Order
+from App_Order.models import Order,Cart
 from App_Payment.models import BillingAddress
 from App_Payment.forms import BillingForm
 
@@ -85,12 +85,32 @@ def complete(request):
         payment_data=request.POST
         # print(payment_data)
         status=payment_data['status']
-        val_id=payment_data['val_id']
-        tran_id=payment_data['tran_id']
-        bank_tran_id=payment_data['bank_tran_id']
+        # bank_tran_id=payment_data['bank_tran_id']
 
         if status=='VALID':
+            val_id=payment_data['val_id']
+            tran_id=payment_data['tran_id']
             messages.success(request,f"Your Payment Completed Successfully!")
+            return HttpResponseRedirect(reverse("App_Payment:purchase",kwargs={'val_id':val_id,'tran_id':tran_id},))
         elif status=='FAILED':
-            messages.warning(request,f"Your Payment attempt is Failed. Please try Again!")
+            messages.warning(request,f"Your Payment attempt is Failed. Please try Again! Page will be redirected in 5 second.")
+
     return render(request,"App_Payment/complete.htm",context={})
+
+
+@login_required
+def purchase(request,val_id,tran_id):
+    order_qs=Order.objects.filter(user=request.user,ordered=False)
+    order=order_qs[0]
+    orderID=tran_id
+    order.ordered=True
+    order.orderID=orderID
+    order.paymentID=val_id
+    order.save()
+
+    cart_items=Cart.objects.filter(user=request.user,purchased=False)
+    for item in cart_items:
+        item.purchased=True
+        item.save()
+
+    return HttpResponseRedirect(reverse("App_Shop:home"))
