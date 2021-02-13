@@ -12,7 +12,7 @@ from App_Shop.models import Product
 def add_to_cart(request,pk):
     item=get_object_or_404(Product,pk=pk)
     order_item=Cart.objects.get_or_create(item=item,user=request.user,purchased=False)
-    order_qs=Order.objects.filter(user=request.user)
+    order_qs=Order.objects.filter(user=request.user,ordered=False)
     
     if order_qs.exists():
         order=order_qs[0]   #dictionary ke list kore
