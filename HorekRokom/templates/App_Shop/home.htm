@@ -3,7 +3,11 @@
 
 
 <div class="container my-5">
+    {% if category is not None %}
+    <h4 class="my-5">Products from {{name}} Category</h4>
+    {% else %}
     <h2 class="my-5">Featured Products</h2>
+    {% endif %}
 
     <div class="row">
         {% for product in object_list %}
