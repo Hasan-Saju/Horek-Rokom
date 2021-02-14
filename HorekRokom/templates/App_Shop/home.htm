@@ -29,6 +29,15 @@
                                 &#2547; {{product.old_price|floatformat:2}}
                             </strike>
                             </span>
+                                <br><br>
+                            <div>
+                                <span>
+                                <a href="{% url 'App_Order:add' pk=product.pk %}" class="btn btn-sm btn-outline-primary text-uppercase">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    Cart
+                                </a>
+                            </span>
+                            </div>
                         </div>
                     </div>
                 </figcaption>
